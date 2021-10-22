@@ -6,18 +6,18 @@
 /*   By: bmaya <bmaya@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 16:12:01 by bmaya             #+#    #+#             */
-/*   Updated: 2021/10/18 16:12:18 by bmaya            ###   ########.fr       */
+/*   Updated: 2021/10/20 19:16:25 by bmaya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-int	len_int(int n)
+static int	len_int(int n)
 {
 	int	i;
 	int	negpos;
 
+	negpos = 0;
 	if (n < 0 && n != -2147483648)
 	{
 		n = n * (-1);
@@ -35,24 +35,30 @@ int	len_int(int n)
 		return (i + 1);
 }
 
-void	positive(char *number, int len, int n)
+static void	positive(char *number, int len, int n)
 {
-	while (len-- >= 0)
+	number[len] = '\0';
+	len--;
+	while (len >= 0)
 	{
 		number[len] = n % 10 + '0';
 		n = n / 10;
+		len--;
 	}
 }
 
-void	negative(char *number, int len, int n)
+static void	negative(char *number, int len, int n)
 {
 	n = n * (-1);
-	while (len-- > 0)
+	number[len] = '\0';
+	len--;
+	while (len > 0)
 	{
 		number[len] = n % 10 + '0';
 		n = n / 10;
+		len--;
 	}
-	number[0] = '-';
+	number[len] = '-';
 }
 
 char	*ft_itoa(int n)
@@ -70,6 +76,5 @@ char	*ft_itoa(int n)
 		negative(number, len, n);
 	else
 		positive(number, len, n);
-	number[len] = '\0';
 	return (number);
 }

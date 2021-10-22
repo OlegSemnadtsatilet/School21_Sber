@@ -6,14 +6,13 @@
 /*   By: bmaya <bmaya@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 16:14:49 by bmaya             #+#    #+#             */
-/*   Updated: 2021/10/19 15:48:08 by bmaya            ###   ########.fr       */
+/*   Updated: 2021/10/21 15:10:49 by bmaya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-void	fill_sub(char const *s, unsigned int start, size_t len, char *sub)
+static void	fill_sub(char const *s, unsigned int start, size_t len, char *sub)
 {
 	unsigned int	i;
 	unsigned int	j;
@@ -34,7 +33,7 @@ void	fill_sub(char const *s, unsigned int start, size_t len, char *sub)
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char			*sub;
+	char	*sub;
 
 	if (s == NULL)
 		return (NULL);

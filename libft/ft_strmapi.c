@@ -6,11 +6,10 @@
 /*   By: bmaya <bmaya@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 16:14:31 by bmaya             #+#    #+#             */
-/*   Updated: 2021/10/18 16:14:32 by bmaya            ###   ########.fr       */
+/*   Updated: 2021/10/20 15:15:42 by bmaya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))

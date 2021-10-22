@@ -6,11 +6,10 @@
 /*   By: bmaya <bmaya@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 16:13:58 by bmaya             #+#    #+#             */
-/*   Updated: 2021/10/18 16:13:59 by bmaya            ###   ########.fr       */
+/*   Updated: 2021/10/20 15:13:23 by bmaya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "libft.h"
 
 void	ft_putendl_fd(char *s, int fd)

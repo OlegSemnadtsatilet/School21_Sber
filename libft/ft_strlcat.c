@@ -6,21 +6,11 @@
 /*   By: bmaya <bmaya@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 16:14:23 by bmaya             #+#    #+#             */
-/*   Updated: 2021/10/19 19:13:57 by bmaya            ###   ########.fr       */
+/*   Updated: 2021/10/20 15:15:33 by bmaya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-size_t	str_lens(char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
 
 size_t	ft_strlcat(char *dst, const	char *src, size_t n)
 {
@@ -31,8 +21,8 @@ size_t	ft_strlcat(char *dst, const	char *src, size_t n)
 	char	*src_char;
 
 	src_char = (char *)src;
-	d_len = str_lens(dst);
-	s_len = str_lens(src_char);
+	d_len = ft_strlen(dst);
+	s_len = ft_strlen(src_char);
 	if (n <= d_len)
 		return (s_len + n);
 	i = d_len;

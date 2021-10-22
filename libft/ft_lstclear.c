@@ -6,12 +6,11 @@
 /*   By: bmaya <bmaya@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 16:12:34 by bmaya             #+#    #+#             */
-/*   Updated: 2021/10/18 16:12:42 by bmaya            ###   ########.fr       */
+/*   Updated: 2021/10/20 15:12:55 by bmaya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {

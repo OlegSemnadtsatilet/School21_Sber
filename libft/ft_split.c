@@ -6,7 +6,7 @@
 /*   By: bmaya <bmaya@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 16:11:25 by bmaya             #+#    #+#             */
-/*   Updated: 2021/10/19 20:45:15 by bmaya            ###   ########.fr       */
+/*   Updated: 2021/10/20 16:08:10 by bmaya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,16 @@ static char	*new_str(char const *s, char c)
 	return (ft_substr(s, 0, j));
 }
 
-static char	**leak_protect(char **arr, int words)
+static char	**leak_protect(char **arr, int saved_words)
 {
 	int	i;
 
 	i = 0;
-	while (i <= words)
+	while (i < saved_words)
 	{
 		free(arr[i]);
 		i++;
 	}
-	free(arr);
 	return (NULL);
 }
 
@@ -66,8 +65,8 @@ static char	**splitting(char **arr, char const *s, char c, int words)
 		if (s[i] != c && s[i])
 		{
 			arr[j] = new_str(&s[i], c);
-			if (!arr)
-				return (leak_protect(arr, words));
+			if (!arr[j])
+				return (leak_protect(arr, j));
 			while (s[i] != c && s[i])
 				i++;
 		}
@@ -92,6 +91,9 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	arr = splitting(arr, s, c, words);
 	if (arr == NULL)
-		return (leak_protect(arr, words));
+	{
+		free(arr);
+		return (NULL);
+	}
 	return (arr);
 }
