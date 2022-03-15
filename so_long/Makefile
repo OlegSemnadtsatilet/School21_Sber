@@ -1,42 +1,58 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: bmaya <bmaya@student.42.fr>                +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/02/22 13:00:01 by bmaya             #+#    #+#              #
-#    Updated: 2022/02/22 13:00:41 by bmaya            ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+SRC_FILES = sources/animations_utils.c \
+			sources/draw_map.c \
+			sources/get_next_line.c \
+			sources/get_next_line_utils.c \
+			sources/moves.c \
+			sources/parse.c \
+			sources/so_long.c \
+			sources/ft_itoa.c \
+			sources/ft_putnbr_fd.c \
+			sources/moves_functions.c
 
-SRC_FILES = sources/
+SRC_FILES_B = sources_bonus/animations_utils_bonus.c \
+			sources_bonus/animations_bonus.c \
+			sources_bonus/draw_map_bonus.c \
+			sources_bonus/get_next_line_bonus.c \
+			sources_bonus/get_next_line_utils_bonus.c \
+			sources_bonus/moves_bonus.c \
+			sources_bonus/parse_bonus.c \
+			sources_bonus/so_long_bonus.c \
+			sources_bonus/ft_itoa.c \
+			sources_bonus/moves_functions_bonus.c
 
-HEAD = ft_printf.h
-NAME = libftprintf.a
-LIBFT = libft/libft.a
-OBJ_SRC = $(SRC_FILES:.c=.o)
-FLAGS = -Wall -Wextra -Werror
+HEAD 		= headers/so_long.h
+HEAD_B 		= headers/so_long_bonus.h
 
-$(NAME): $(OBJ_SRC)
-			$(MAKE) -C ./libft
-			cp $(LIBFT) $(NAME)
-			ar rc $(NAME) $(OBJ_SRC)
-			ranlib $(NAME)
+NAME 		= so_long
+NAME_B 		= so_long_bonus
 
-%.o:	%.c $(HEAD)
+OBJ_SRC 	= $(SRC_FILES:.c=.o)
+OBJ_SRC_B 	= $(SRC_FILES_B:.c=.o)
+
+FLAGS 		= -Wall -Wextra -Werror
+LINKS 		= -lmlx -framework OpenGL -framework AppKit
+
+$(NAME): 	$(OBJ_SRC)
+			gcc $(OBJ_SRC) $(LINKS) $(LIBFT) -o $(NAME)
+
+$(NAME_B):	$(OBJ_SRC_B)
+			gcc $(OBJ_SRC_B) $(LINKS) $(LIBFT) -o $(NAME_B)
+
+%.o:	%.c $(HEAD) $(HEAD_B)
 			gcc $(FLAGS) -c $< -o $@
 
-all: $(NAME)
+all: 		$(NAME_B)
+
+bonus:		$(NAME_B)
 
 clean:
-	$(MAKE) clean -C ./libft
-	rm -f $(OBJ_SRC)
+			rm -f $(OBJ_SRC) $(OBJ_SRC_B)
 
-fclean: clean
-	$(MAKE) fclean -C ./libft
-	rm -f $(NAME)
+fclean:		clean
+			rm -f $(NAME) $(NAME_B)
 
-re: fclean all
+re:			fclean all
+
+re_bonus: 	fclean bonus
 
 .PHONY: all bonus clean fclean re
