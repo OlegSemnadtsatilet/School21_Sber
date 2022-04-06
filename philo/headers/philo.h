@@ -6,7 +6,7 @@
 /*   By: bmaya <bmaya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:53:56 by bmaya             #+#    #+#             */
-/*   Updated: 2022/04/06 11:53:55 by bmaya            ###   ########.fr       */
+/*   Updated: 2022/04/06 14:50:04 by bmaya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <pthread.h>
 # include <stdio.h>
 # include <sys/time.h>
+# include <unistd.h>
 
 typedef struct s_philo
 {

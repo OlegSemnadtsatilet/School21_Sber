@@ -6,7 +6,7 @@
 /*   By: bmaya <bmaya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 14:34:39 by bmaya             #+#    #+#             */
-/*   Updated: 2022/04/06 12:49:00 by bmaya            ###   ########.fr       */
+/*   Updated: 2022/04/06 14:11:57 by bmaya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,6 @@ int	fill_general(t_general *general, char **argv)
 			general->meal_times = ft_atoi(argv[5]);
 	}
 	general->death_or_ate_flag = 0;
-	printf("%d\n", general->philo_num);
-	printf("%d\n", general->die_time);
-	printf("%d\n", general->eat_time);
-	printf("%d\n", general->sleep_time);
-	printf("%d\n", general->meal_times);
 	fill_philos(general);
 	return (0);
 }
@@ -109,6 +104,8 @@ void	eating(t_philo *philo)
 
 	general = philo->general;
 	take_forks(philo);
+	pthread_mutex_unlock(&general->forks[philo->right_fork]);
+	pthread_mutex_unlock(&general->forks[philo->left_fork]);
 }
 
 int	main(int argc, char **argv)
@@ -120,8 +117,9 @@ int	main(int argc, char **argv)
 	if (check_args(&general, argv) == 1)
 		return (1);
 	fill_general(&general, argv);
-	// if (turn_on_mutexes(&general))
-	// 	return (1);
-	// start_threads(&general);
-	// close_threads(&general);
+	if (turn_on_mutexes(&general))
+		return (1);
+	start_threads(&general);
+	close_threads(&general);
+	return (0);
 }

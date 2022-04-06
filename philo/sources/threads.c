@@ -6,11 +6,20 @@
 /*   By: bmaya <bmaya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 09:59:34 by bmaya             #+#    #+#             */
-/*   Updated: 2022/04/06 11:46:51 by bmaya            ###   ########.fr       */
+/*   Updated: 2022/04/06 14:49:08 by bmaya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/philo.h"
+
+void	thread_sleep(t_general *general)
+{
+	long long	first_timestamp;
+
+	first_timestamp = get_timestamp();
+	while (get_timestamp() - first_timestamp < general->sleep_time)
+		usleep(50);
+}
 
 static void	*thread_behavior(void *void_philo)
 {
@@ -20,6 +29,7 @@ static void	*thread_behavior(void *void_philo)
 	philo = (t_philo *)void_philo;
 	general = philo->general;
 	eating(philo);
+	thread_sleep(general);
 	return (0);
 }
 
