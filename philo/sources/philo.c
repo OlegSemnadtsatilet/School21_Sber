@@ -6,11 +6,11 @@
 /*   By: bmaya <bmaya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 14:34:39 by bmaya             #+#    #+#             */
-/*   Updated: 2022/04/05 14:21:35 by bmaya            ###   ########.fr       */
+/*   Updated: 2022/04/06 12:49:00 by bmaya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/philo.h"
+#include "../headers/philo.h"
 
 int	turn_on_mutexes(t_general *general)
 {
@@ -65,7 +65,12 @@ int	fill_general(t_general *general, char **argv)
 			general->meal_times = ft_atoi(argv[5]);
 	}
 	general->death_or_ate_flag = 0;
-	fill_philos(&general);
+	printf("%d\n", general->philo_num);
+	printf("%d\n", general->die_time);
+	printf("%d\n", general->eat_time);
+	printf("%d\n", general->sleep_time);
+	printf("%d\n", general->meal_times);
+	fill_philos(general);
 	return (0);
 }
 
@@ -76,7 +81,7 @@ int	check_args(t_general *general, char **argv)
 	return (0);
 }
 
-void take_forks(t_philo *philo)
+void	take_forks(t_philo *philo)
 {
 	t_general	*general;
 
@@ -106,40 +111,17 @@ void	eating(t_philo *philo)
 	take_forks(philo);
 }
 
-void	*thread_behavior(void *void_philo)
-{
-	t_philo		*philo;
-	t_general	*general;
-
-	philo = (t_philo *)void_philo;
-	general = philo->general;
-	eating(philo);
-}
-
-int	start_threads(t_general *general)
-{
-	int		number;
-
-	number = 0;
-	general->start_time = get_timestamp();
-	while (number < general->philo_num)
-	{
-		pthread_create(&general->philos[number].thread, 0, \
-			thread_behavior, &general->philos[number]);
-		number++;
-	}
-}
-
 int	main(int argc, char **argv)
 {
 	t_general	general;
 
-	if (argc != 5 || argc != 6)
+	if (argc != 5 && argc != 6)
 		return (1);
 	if (check_args(&general, argv) == 1)
 		return (1);
 	fill_general(&general, argv);
-	if (turn_on_mutexes(&general))
-		return (1);
-	start_threads(&general);
+	// if (turn_on_mutexes(&general))
+	// 	return (1);
+	// start_threads(&general);
+	// close_threads(&general);
 }

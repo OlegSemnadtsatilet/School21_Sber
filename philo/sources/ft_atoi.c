@@ -6,16 +6,16 @@
 /*   By: bmaya <bmaya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 16:11:38 by bmaya             #+#    #+#             */
-/*   Updated: 2022/03/18 18:43:32 by bmaya            ###   ########.fr       */
+/*   Updated: 2022/04/06 11:44:04 by bmaya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/philo.h"
 
-static int	strtonbr(const char *s)
+static long long	str_to_nbr(const char *s)
 {
-	int	i;
-	int	number;
+	int			i;
+	long long	number;
 
 	i = 0;
 	number = 0;
@@ -29,7 +29,7 @@ static int	strtonbr(const char *s)
 	return (number);
 }	
 
-int	ft_atoi(const char *str)
+long long	ft_atoi(const char *str)
 {
 	int	i;
 
@@ -40,11 +40,11 @@ int	ft_atoi(const char *str)
 		str[i] == '\r' || str[i] == '\n' || str[i] == 32)
 			i++;
 		if (str[i] == '-')
-			return (strtonbr(&str[i + 1]) * -1);
+			return (str_to_nbr(&str[i + 1]) * -1);
 		else if (str[i] == '+')
-			return (strtonbr(&str[i + 1]));
+			return (str_to_nbr(&str[i + 1]));
 		else
-			return (strtonbr(&str[i]));
+			return (str_to_nbr(&str[i]));
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bmaya <bmaya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:53:56 by bmaya             #+#    #+#             */
-/*   Updated: 2022/04/05 13:45:47 by bmaya            ###   ########.fr       */
+/*   Updated: 2022/04/06 11:53:55 by bmaya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,12 @@ typedef struct s_general
 	pthread_mutex_t	death_or_meal_check;
 }	t_general;
 
-long long	ft_atoi(char *str);
+long long	ft_atoi(const char *str);
+int			start_threads(t_general *general);
+void		close_threads(t_general *general);
+long long	get_timestamp(void);
+void		print_action(t_general *general, int philo_number, char *string);
+void		eating(t_philo *philo);
 
 #endif
 
