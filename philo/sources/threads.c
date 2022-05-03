@@ -6,20 +6,11 @@
 /*   By: bmaya <bmaya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 09:59:34 by bmaya             #+#    #+#             */
-/*   Updated: 2022/04/06 14:49:08 by bmaya            ###   ########.fr       */
+/*   Updated: 2022/05/02 18:26:53 by bmaya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/philo.h"
-
-void	thread_sleep(t_general *general)
-{
-	long long	first_timestamp;
-
-	first_timestamp = get_timestamp();
-	while (get_timestamp() - first_timestamp < general->sleep_time)
-		usleep(50);
-}
 
 static void	*thread_behavior(void *void_philo)
 {
@@ -28,8 +19,12 @@ static void	*thread_behavior(void *void_philo)
 
 	philo = (t_philo *)void_philo;
 	general = philo->general;
-	eating(philo);
-	thread_sleep(general);
+	while (1)
+	{
+		eating(philo);
+		print_action(general, philo->philo_id, "is sleeping");
+		thread_sleep(general->sleep_time);
+	}
 	return (0);
 }
 
@@ -43,6 +38,7 @@ int	start_threads(t_general *general)
 	{
 		pthread_create(&general->philos[number].thread, 0, \
 			thread_behavior, &general->philos[number]);
+		general->philos[number].last_meal_time = get_timestamp();
 		number++;
 	}
 	return (0);

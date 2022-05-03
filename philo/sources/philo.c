@@ -6,7 +6,7 @@
 /*   By: bmaya <bmaya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 14:34:39 by bmaya             #+#    #+#             */
-/*   Updated: 2022/04/06 14:11:57 by bmaya            ###   ########.fr       */
+/*   Updated: 2022/05/03 12:34:17 by bmaya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,12 @@ void	eating(t_philo *philo)
 	t_general	*general;
 
 	general = philo->general;
+	print_action(general, philo->philo_id, "is thinking");
 	take_forks(philo);
+	print_action(general, philo->philo_id, "is eating");
+	thread_sleep(general->eat_time);
+	philo->ate_times++;
+	philo->last_meal_time = get_timestamp() - general->start_time;
 	pthread_mutex_unlock(&general->forks[philo->right_fork]);
 	pthread_mutex_unlock(&general->forks[philo->left_fork]);
 }

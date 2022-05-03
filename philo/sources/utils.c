@@ -6,7 +6,7 @@
 /*   By: bmaya <bmaya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 14:11:16 by bmaya             #+#    #+#             */
-/*   Updated: 2022/04/06 13:59:11 by bmaya            ###   ########.fr       */
+/*   Updated: 2022/05/02 18:01:21 by bmaya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,17 @@ long long	get_timestamp(void)
 
 	gettimeofday(&tv, NULL);
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
+
+void	thread_sleep(long long time)
+{
+	long long	first_timestamp;
+
+	first_timestamp = get_timestamp();
+	while ((get_timestamp() - first_timestamp) < time)
+	{
+		usleep(50);
+	}
 }
 
 void	print_action(t_general *general, int philo_number, char *string)

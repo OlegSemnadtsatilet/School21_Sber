@@ -6,7 +6,7 @@
 /*   By: bmaya <bmaya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:53:56 by bmaya             #+#    #+#             */
-/*   Updated: 2022/04/06 14:50:04 by bmaya            ###   ########.fr       */
+/*   Updated: 2022/05/02 17:37:10 by bmaya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void		close_threads(t_general *general);
 long long	get_timestamp(void);
 void		print_action(t_general *general, int philo_number, char *string);
 void		eating(t_philo *philo);
+void		thread_sleep(long long time);
 
 #endif
 
