@@ -6,7 +6,7 @@
 /*   By: bmaya <bmaya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 14:11:16 by bmaya             #+#    #+#             */
-/*   Updated: 2022/05/02 18:01:21 by bmaya            ###   ########.fr       */
+/*   Updated: 2022/05/08 15:40:08 by bmaya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,12 @@ void	print_action(t_general *general, int philo_number, char *string)
 	long long	time_from_start;
 
 	pthread_mutex_lock(&general->print_check);
+	if (general->death_or_ate_flag)
+	{
+		pthread_mutex_unlock(&general->print_check);
+		return ;
+	}
 	printf("%lli %d %s\n", get_timestamp() - general->start_time, \
-	philo_number, string);
-	//проверки
+		philo_number, string);
 	pthread_mutex_unlock(&general->print_check);
 }

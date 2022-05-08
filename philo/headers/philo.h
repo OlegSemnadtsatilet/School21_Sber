@@ -6,7 +6,7 @@
 /*   By: bmaya <bmaya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:53:56 by bmaya             #+#    #+#             */
-/*   Updated: 2022/05/02 17:37:10 by bmaya            ###   ########.fr       */
+/*   Updated: 2022/05/08 16:12:24 by bmaya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <sys/time.h>
 # include <unistd.h>
+# include <stdlib.h>
 
 typedef struct s_philo
 {
@@ -24,7 +25,7 @@ typedef struct s_philo
 	int					left_fork;
 	int					right_fork;
 	int					ate_times;
-	int					last_meal_time;
+	long long			last_meal_time;
 	struct s_general	*general;
 	pthread_t			thread;
 }	t_philo;
@@ -32,7 +33,7 @@ typedef struct s_philo
 typedef struct s_general
 {
 	int				philo_num;
-	int				die_time;
+	int				die_timer;
 	int				eat_time;
 	int				sleep_time;
 	int				meal_times;
@@ -51,6 +52,8 @@ long long	get_timestamp(void);
 void		print_action(t_general *general, int philo_number, char *string);
 void		eating(t_philo *philo);
 void		thread_sleep(long long time);
+void		alone_hungry_philo(t_general *general, t_philo *philo);
+void		check_ate_and_death(t_general *general);
 
 #endif
 
